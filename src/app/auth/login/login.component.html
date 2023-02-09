@@ -1,0 +1,24 @@
+<html>
+<body>
+
+<h2>HTML Forms</h2>
+
+<form>
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" [(ngModel)]="email"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" [(ngModel)]="password"><br><br>
+
+  <button style="background-color: green;" (click)="login()">Login z</button>
+</form>
+<br>
+
+<table>
+<tr *ngFor="let d of data; index as i">
+  <td>{{d.id}}</td>
+  <td>{{d.measureDate}}</td>
+  <td>{{d.measurementValue}}</td>
+</tr>
+</table>
+</body>
+</html>
