@@ -1,1 +1,5 @@
-<app-login></app-login>
+<p *ngIf="authService.isLogged | async">Logged</p>
+
+<app-navigation></app-navigation>
+<a href="http://localhost:4200/rivers/measurements">CLICK</a>
+<router-outlet></router-outlet>

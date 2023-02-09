@@ -1,5 +1,5 @@
-import { tap } from 'rxjs';
-import { AuthService } from './../auth.service';
+import { BehaviorSubject, tap } from 'rxjs';
+import { AuthService, Data } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -9,39 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  title = 'weather-frontend';
   email : string = 'b@b.pl';
   password : string = 'bbbxax';
-  data : Data[] = [];
 
 constructor(private authService: AuthService) { }
 
-  ngOnInit() {
-  }
-
-  login() {
-    let payload = {email: this.email, password: this.password}
-    this.authService.logInApi(payload).pipe(
-      tap( (res : any) => {
-      console.log(res.token);
-      localStorage.setItem('sesToken', res.token)
-      this.getData(res.token)
-    })).subscribe();
-
-  }
-
-  getData(token: string)
-  {
-    this.authService.getData(token).subscribe((res: Data[]) => {
-      console.log(res);
-      this.data = res;
-    })
-  }
+ngOnInit() {
 }
 
-export interface Data {
-  id: number;
-  measurementValue: any;
-  measureDate: Data;
+logCommand() {
+  this.authService.login(this.email, this.password);
+}
+
   }
 

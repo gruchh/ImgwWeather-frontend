@@ -1,24 +1,34 @@
-<html>
-<body>
+<form class="vh-100" style="background-color: #508bfc">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <h3 class="mb-5">Sign in</h3>
 
-<h2>HTML Forms</h2>
+            <div class="form-outline mb-4">
+              <input
+                type="email"
+                id="typeEmailX-2"
+                name="name"
+                [(ngModel)]="email"
+                class="form-control form-control-lg"
+              />
+            </div>
 
-<form>
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" [(ngModel)]="email"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" [(ngModel)]="password"><br><br>
-
-  <button style="background-color: green;" (click)="login()">Login z</button>
+            <div class="form-outline mb-4">
+              <input
+                type="password"
+                id="typePasswordX-2"
+                name="password"
+                [(ngModel)]="password"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" (click)="logCommand()">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
-<br>
-
-<table>
-<tr *ngFor="let d of data; index as i">
-  <td>{{d.id}}</td>
-  <td>{{d.measureDate}}</td>
-  <td>{{d.measurementValue}}</td>
-</tr>
-</table>
-</body>
-</html>

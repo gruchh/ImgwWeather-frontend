@@ -1,5 +1,5 @@
+import { AuthService } from './auth/auth.service';
 import { Component } from '@angular/core';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,12 @@ import { tap } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+title(title: any) {
+  throw new Error('Method not implemented.');
+}
 
-constructor() { }
+constructor(public authService : AuthService) {
+
+ }
 
 }

@@ -1,26 +1,43 @@
+import { BehaviorSubject, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-import { Data } from './login/login.component';
-import {FormsModule} from "@angular/forms";
+import { ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  title = 'weather-frontend';
+  data : Data[] = [];
 
-  private header = new HttpHeaders();
-  private globalUrl : string = "http://localhost:8080";
+  private _isLogged = new BehaviorSubject<boolean>(false);
+  isLogged = this._isLogged.asObservable();
 
-  constructor(private httpClient: HttpClient) { }
-
-  logInApi(payload: any) {
-    return this.httpClient.post(this.globalUrl + '/auth/login', payload)
+  constructor(private apiService : ApiService) {
+    const token = localStorage.getItem('sesToken_auth');
+    this._isLogged.next(!!token);
   }
 
-  getData(token: string): Observable<Data[]> {
-    this.header = this.header.set('Authorization', 'Bearer ' + token);
-    return this.httpClient.get<Data[]>(this.globalUrl +'/getSampleWaterMeasures', {'headers': this.header})
+  login(email : string, password : string) {
+    let payload = {email, password}
+
+    this.apiService.logInApi(payload).pipe(
+      tap( (res : any) => {
+      console.log(res.token);
+      localStorage.setItem('sesToken_auth', res.token);
+      this._isLogged.next(true);
+      this.getData(res.token)
+    })).subscribe();
   }
 
+  getData(token: string)
+  {
+    this.apiService.getData(token)
+  }
 }
+
+
+export interface Data {
+  id: number;
+  measurementValue: any;
+  measureDate: Data;
+  }
