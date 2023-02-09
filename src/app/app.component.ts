@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'weather-frontend';
+  email : string = 'b@b.pl';
+  password : string = 'bbbxax';
+  data : Data[] = [];
+
 
 constructor(private appService: AppService) { }
 
